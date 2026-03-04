@@ -1,0 +1,10 @@
+:root {
+  --bg: #0f172a;
+  --card: #0b1220;
+  --accent: #ff6b6b;
+  --text: #e6eef8;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,system-ui}
+.container{max-width:980px;margin:0 auto;padding:12px}
+.btn{background:var(--accent);border:none;padding:8px 12px;border-radius:8px;color:#fff;cursor:pointer}

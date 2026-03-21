@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Home - Кино Әлемі</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">MOVIE</div>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="#">Movies</a>
+            <a href="#">Series</a>
+            <a href="#">Genre</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search movies...">
+        </div>
+    </header>
+
+    <section class="hero" id="hero-section">
+        <div class="hero-content">
+            <h1>Discover Movies</h1>
+            <p>Find your favorite movies and explore new releases</p>
+            <button class="btn">EXPLORE NOW</button>
+        </div>
+    </section>
+
+    <section class="movie-section">
+        <h2>Trending Movies</h2>
+        <div class="swiper trending-swiper">
+            <div class="swiper-wrapper" id="trending"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section class="movie-section">
+        <h2>Popular Movies</h2>
+        <div class="swiper popular-swiper">
+            <div class="swiper-wrapper" id="popular"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Movie App © 2026. Барлық құқықтар қорғалған.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="HomePage.js"></script>
+</body>
+</html>

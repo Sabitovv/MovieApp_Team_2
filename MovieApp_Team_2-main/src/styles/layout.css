@@ -287,3 +287,37 @@ nav a:hover, nav a.active {
 .faq-answer p {
     margin-top: 1rem;
 }
+/* Жоғарыға қайту батырмасының стилі */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #e50914; /* Негізгі қызыл түс */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Басында жасырын */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.back-to-top:hover {
+    background-color: #ff0f1a;
+    transform: scale(1.1);
+}
+
+.back-to-top .arrow {
+    font-size: 24px;
+    line-height: 1;
+}
+
+/* Скролл эффектісі біркелкі болуы үшін */
+html {
+    scroll-behavior: smooth;
+}

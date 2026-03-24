@@ -1,12 +1,11 @@
 /**
- * MovieApp НЕГІЗГІ ЛОГИКАСЫ
- * Функционал: Hero Swiper, API-ден дерек алу, Модальді терезе, Іздеу және FAQ.
+ * MovieApp НЕГІЗГІ ЛОГИКАСЫ + SKELETON LOADING
+ * Функционал: Hero Swiper, API деректері, Модальді терезе, Іздеу, FAQ, Скролл және Жоғарыға қайту.
  */
 
 const API_KEY = "121752a2";
 const BASE_URL = "https://www.omdbapi.com/";
 
-// Swiper даналарын сақтауға арналған объект
 let swiperInstances = {};
 
 /**
@@ -26,18 +25,36 @@ function initHeroSwiper() {
 }
 
 /**
- * 2. ФИЛЬМДЕРДІ ЖҮКТЕУ (API)
+ * 2. ФИЛЬМДЕРДІ ЖҮКТЕУ (API ЖӘНЕ SKELETON ЛОГИКАСЫ)
  */
 async function fetchMovies(query, containerId, swiperSelector) {
     const container = document.getElementById(containerId);
     if (!container) return;
+
+    // ЖҮКТЕЛУ БАСТАЛДЫ: Скелетондарды көрсету (8 дана)
+    const skeletonHTML = Array(8).fill(`
+        <div class="swiper-slide">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-text"></div>
+        </div>
+    `).join('');
+    
+    container.innerHTML = skeletonHTML;
+    
+    // Скелетондар да Swiper арқылы сырғуы үшін уақытша инициализация
+    initSwiper(swiperSelector);
 
     try {
         const response = await fetch(`${BASE_URL}?apikey=${API_KEY}&s=${query}`);
         const data = await response.json();
 
         if (data.Response === "True") {
-            container.innerHTML = data.Search.map(movie => {
+            const uniqueMovies = data.Search.filter((movie, index, self) =>
+                index === self.findIndex((m) => m.imdbID === movie.imdbID)
+            );
+
+            // ЖҮКТЕЛУ АЯҚТАЛДЫ: Нақты деректермен алмастыру
+            container.innerHTML = uniqueMovies.map(movie => {
                 const poster = movie.Poster !== "N/A" 
                     ? movie.Poster 
                     : "https://via.placeholder.com/300x450?text=No+Poster";
@@ -54,10 +71,14 @@ async function fetchMovies(query, containerId, swiperSelector) {
                 `;
             }).join('');
 
+            // Swiper-ді нақты деректермен қайта іске қосу
             initSwiper(swiperSelector);
+        } else {
+            container.innerHTML = `<p class="error-msg">No results found for "${query}"</p>`;
         }
     } catch (error) {
         console.error("Деректерді жүктеу қатесі:", error);
+        container.innerHTML = `<p class="error-msg">Connection error. Please try again.</p>`;
     }
 }
 
@@ -87,7 +108,7 @@ function initSwiper(selector) {
 }
 
 /**
- * 4. МОДАЛЬДІ ТЕРЕЗЕ (INFO MODAL)
+ * 4. МОДАЛЬДІ ТЕРЕЗЕ
  */
 const modal = document.getElementById("movie-modal");
 const modalBodyContent = document.getElementById("modal-body-content");
@@ -130,15 +151,28 @@ async function openMovieModal(movieId) {
 }
 
 function closeMovieModal() {
-    modal.style.display = "none";
-    document.body.style.overflow = "auto";
+    if (modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
 }
 
 if (closeModalBtn) closeModalBtn.onclick = closeMovieModal;
 window.onclick = (e) => { if (e.target === modal) closeMovieModal(); };
 
 /**
- * 5. БЕТ ЖҮКТЕЛГЕНДЕГІ ӘРЕКЕТТЕР
+ * 5. СКРОЛЛ ЖӘНЕ БАСҚАРУ
+ */
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+window.scrollToSection = scrollToSection;
+
+/**
+ * 6. DOM ЖҮКТЕЛГЕНДЕГІ НЕГІЗГІ ОҚИҒАЛАР
  */
 document.addEventListener("DOMContentLoaded", () => {
     initHeroSwiper();
@@ -166,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // FAQ Аккордеон (Бір сұрақ ашылғанда басқасын жабу)
+    // FAQ Аккордеон
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         item.addEventListener('toggle', () => {
@@ -176,6 +210,35 @@ document.addEventListener("DOMContentLoaded", () => {
                         otherItem.removeAttribute('open');
                     }
                 });
+            }
+        });
+    });
+
+    // Жоғарыға қайту
+    const backToTopBtn = document.getElementById("backToTop");
+    if (backToTopBtn) {
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 400) {
+                backToTopBtn.style.display = "flex";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+
+    // Hero батырмалары
+    const heroBtns = document.querySelectorAll('.hero .btn');
+    heroBtns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            if (index === 0) {
+                scrollToSection('trending-movies');
+            } else if (index === 1) {
+                openMovieModal('tt0903747');
+            } else if (index === 2) {
+                scrollToSection('popular-movies');
             }
         });
     });

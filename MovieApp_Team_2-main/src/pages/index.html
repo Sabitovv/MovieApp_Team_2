@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Home - Кино Әлемі</title>
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="../styles/style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/main-page.css">
 </head>
 <body>
 
@@ -23,17 +28,42 @@
     </header>
 
     <section class="hero" id="hero-section">
-        <div class="hero-content">
-            <h1>Discover Movies</h1>
-            <p>Find your favorite movies and explore new releases</p>
-            <button class="btn">EXPLORE NOW</button>
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
+                
+                <div class="swiper-slide hero-slide-1">
+                    <div class="hero-content">
+                        <h1>Discover Movies</h1>
+                        <p>Find your favorite movies and explore new releases</p>
+                        <button class="btn">EXPLORE NOW</button>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide hero-slide-2">
+                    <div class="hero-content">
+                        <h1>Amazing Series</h1>
+                        <p>Watch the best TV shows from all over the world</p>
+                        <button class="btn">WATCH NOW</button>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide hero-slide-3">
+                    <div class="hero-content">
+                        <h1>New Releases</h1>
+                        <p>Stay updated with the latest cinema world</p>
+                        <button class="btn">LEARN MORE</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
     <section class="movie-section">
         <h2>Trending Movies</h2>
         <div class="swiper trending-swiper">
-            <div class="swiper-wrapper" id="trending"></div>
+            <div class="swiper-wrapper" id="trending">
+                </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
@@ -42,11 +72,67 @@
     <section class="movie-section">
         <h2>Popular Movies</h2>
         <div class="swiper popular-swiper">
-            <div class="swiper-wrapper" id="popular"></div>
+            <div class="swiper-wrapper" id="popular">
+                </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
     </section>
+
+    <section class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            
+            <details class="faq-item">
+                <summary class="faq-question">
+                    What is Movie Home?
+                    <div class="faq-icon">+</div>
+                </summary>
+                <div class="faq-answer">
+                    <p>Movie Home is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary class="faq-question">
+                    How much does Movie Home cost?
+                    <div class="faq-icon">+</div>
+                </summary>
+                <div class="faq-answer">
+                    <p>Watch Movie Home on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. No extra costs, no contracts.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary class="faq-question">
+                    Where can I watch?
+                    <div class="faq-icon">+</div>
+                </summary>
+                <div class="faq-answer">
+                    <p>Watch anywhere, anytime. Sign in with your account to watch instantly on the web at moviehome.com from your personal computer or on any internet-connected device.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary class="faq-question">
+                    How do I cancel?
+                    <div class="faq-icon">+</div>
+                </summary>
+                <div class="faq-answer">
+                    <p>Movie Home is flexible. There are no pesky contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime.</p>
+                </div>
+            </details>
+
+        </div>
+    </section>
+
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body-content">
+                </div>
+        </div>
+    </div>
 
     <footer class="footer">
         <p>Movie App © 2026. Барлық құқықтар қорғалған.</p>
@@ -54,5 +140,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="HomePage.js"></script>
+
 </body>
 </html>

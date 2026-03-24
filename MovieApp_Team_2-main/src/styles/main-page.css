@@ -1,0 +1,219 @@
+/* ==========================================================================
+   1-БӨЛІМ: HERO SECTION (БАС БАННЕР)
+   ========================================================================== */
+.hero {
+    height: 85vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.hero .swiper-slide {
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Слайдтардың суреттері мен мәтін анық көрінуі үшін градиент */
+.hero-slide-1 { 
+    background-image: linear-gradient(to right, rgba(6, 11, 22, 1) 25%, rgba(6, 11, 22, 0.2) 100%), 
+                      url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2070'); 
+}
+.hero-slide-2 { 
+    background-image: linear-gradient(to right, rgba(6, 11, 22, 1) 25%, rgba(6, 11, 22, 0.2) 100%), 
+                      url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2025'); 
+}
+.hero-slide-3 { 
+    background-image: linear-gradient(to right, rgba(6, 11, 22, 1) 25%, rgba(6, 11, 22, 0.2) 100%), 
+                      url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059'); 
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 10;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    color: white;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #fb1d4f;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   2-БӨЛІМ: MOVIE SECTIONS & CARDS
+   ========================================================================== */
+.movie-section {
+    padding: 4rem 5% 1rem;
+}
+
+.movie-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--primary-color);
+    padding-left: 1rem;
+    color: white;
+}
+
+/* Фильм картасы (Netflix Hover Style) */
+.movie-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.movie-card:hover {
+    transform: scale(1.08);
+    z-index: 50;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.movie-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    display: block;
+}
+
+.movie-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 2rem 0.5rem 0.8rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    opacity: 0;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.movie-card:hover .movie-info {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   NETFLIX MODAL - ТҮЗЕТІЛГЕН НҰСҚА
+   ========================================================================== */
+
+.modal-content {
+    background-color: #181818;
+    margin: 30px auto;
+    border-radius: 10px;
+    width: 95%;
+    max-width: 850px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+/* СУРЕТТІҢ КОНТЕЙНЕРІ */
+.modal-hero-header {
+    width: 100%;
+    height: 480px; /* Биіктігін арттырдық */
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    display: block;
+}
+
+/* СУРЕТ ПЕН МӘТІНДІ ҚОСАТЫН ҚОЮ ГРАДИЕНТ */
+.modal-hero-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Градиентті бүкіл суретке жайдық */
+    background: linear-gradient(to top, #181818 5%, transparent 50%);
+}
+
+/* МӘТІН БӨЛІМІ */
+.modal-info {
+    padding: 0 3rem 3rem;
+    margin-top: -80px; /* Мәтінді суретке көбірек жақындату */
+    position: relative;
+    z-index: 10;
+}
+
+.modal-info h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.modal-meta-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.modal-rating {
+    color: #46d369; /* Жасыл рейтинг */
+    font-weight: bold;
+}
+
+.modal-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #d2d2d2;
+    margin-bottom: 2rem;
+}
+
+.modal-extra-info {
+    font-size: 0.9rem;
+    color: #808080;
+}
+
+/* ЖАБУ БАТЫРМАСЫ */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+}

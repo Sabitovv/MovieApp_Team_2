@@ -1,0 +1,46 @@
+<section class="support-page" aria-label="Support center">
+  <header class="support-page__header">
+    <h1 class="support-page__title">Support Center</h1>
+    <p class="support-page__lead">
+      Have issues with playback or account settings? Browse common answers or send us a message.
+    </p>
+  </header>
+
+  <section class="support-block" aria-label="Frequently asked questions">
+    <h2 class="support-block__title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <article class="faq-item">
+        <h3>How can I watch movies and series?</h3>
+        <p>Create an account, sign in, and open the Movies tab to start streaming.</p>
+      </article>
+      <article class="faq-item">
+        <h3>Is the service free?</h3>
+        <p>Yes, there is a free tier. You can upgrade any time for premium benefits.</p>
+      </article>
+      <article class="faq-item">
+        <h3>Video is not loading. What should I do?</h3>
+        <p>Check your connection, refresh the page, and try another browser tab.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="support-block" aria-label="Contact support">
+    <h2 class="support-block__title">Contact Support</h2>
+    <form id="supportForm" class="support-form">
+      <label>
+        <span>Name</span>
+        <input name="name" type="text" required placeholder="Your name" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input name="email" type="email" required placeholder="you@example.com" />
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="5" placeholder="Describe your issue"></textarea>
+      </label>
+      <button type="submit" class="support-form__submit">Send Message</button>
+      <p id="supportFormStatus" class="support-form__status" aria-live="polite"></p>
+    </form>
+  </section>
+</section>

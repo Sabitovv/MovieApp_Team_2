@@ -1,0 +1,86 @@
+<section class="home-page" aria-label="Home page">
+  <section class="home-hero" id="hero-section">
+    <div class="swiper home-hero__swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide home-hero__slide home-hero__slide--1">
+          <div class="home-hero__content">
+            <h1>Discover Movies</h1>
+            <p>Find your favorite movies and explore new releases.</p>
+            <button class="home-btn" type="button" data-scroll-target="trending-movies">Explore now</button>
+          </div>
+        </div>
+        <div class="swiper-slide home-hero__slide home-hero__slide--2">
+          <div class="home-hero__content">
+            <h1>Amazing Series</h1>
+            <p>Watch the best TV shows from all over the world.</p>
+            <button class="home-btn" type="button" data-open-sample>Watch now</button>
+          </div>
+        </div>
+        <div class="swiper-slide home-hero__slide home-hero__slide--3">
+          <div class="home-hero__content">
+            <h1>New Releases</h1>
+            <p>Stay updated with the latest from the cinema world.</p>
+            <button class="home-btn" type="button" data-scroll-target="popular-movies">Learn more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-toolbar" aria-label="Search movies">
+    <label class="home-search" for="home-search-input">
+      <span>Search</span>
+      <input id="home-search-input" type="text" placeholder="Search movies..." />
+    </label>
+  </section>
+
+  <section class="home-section" id="trending-movies">
+    <h2>Trending Movies</h2>
+    <div class="swiper home-swiper home-swiper--trending">
+      <div class="swiper-wrapper" id="home-trending-list"></div>
+      <div class="swiper-button-next home-swiper-next-trending"></div>
+      <div class="swiper-button-prev home-swiper-prev-trending"></div>
+    </div>
+  </section>
+
+  <section class="home-section" id="popular-movies">
+    <h2>Popular Movies</h2>
+    <div class="swiper home-swiper home-swiper--popular">
+      <div class="swiper-wrapper" id="home-popular-list"></div>
+      <div class="swiper-button-next home-swiper-next-popular"></div>
+      <div class="swiper-button-prev home-swiper-prev-popular"></div>
+    </div>
+  </section>
+
+  <section class="home-faq" aria-label="Frequently asked questions">
+    <h2>Frequently Asked Questions</h2>
+    <details class="home-faq__item">
+      <summary>
+        <span>What is Movie Home?</span>
+        <span class="home-faq__icon">+</span>
+      </summary>
+      <p>
+        Movie Home is a streaming service with movies, TV shows, and curated collections.
+      </p>
+    </details>
+    <details class="home-faq__item">
+      <summary>
+        <span>How much does Movie Home cost?</span>
+        <span class="home-faq__icon">+</span>
+      </summary>
+      <p>
+        You can use a free plan and upgrade to premium with monthly or yearly billing.
+      </p>
+    </details>
+  </section>
+
+  <div id="home-movie-modal" class="home-modal" aria-hidden="true">
+    <div class="home-modal__content">
+      <button class="home-modal__close" type="button" aria-label="Close modal">&times;</button>
+      <div id="home-modal-body"></div>
+    </div>
+  </div>
+
+  <footer class="home-footer">Movie App © 2026</footer>
+  <button id="home-back-to-top" class="home-back-to-top" type="button" aria-label="Go to top">↑</button>
+</section>

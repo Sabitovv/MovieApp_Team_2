@@ -1,0 +1,212 @@
+.subscription-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.subscription-page__hero {
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(14, 20, 31, 0.96) 0%, rgba(35, 10, 16, 0.88) 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.subscription-page__title {
+  margin: 0;
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  font-weight: 700;
+}
+
+.subscription-page__lead {
+  margin: 10px 0 0;
+  color: var(--app-muted);
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+.billing-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 4px;
+  display: inline-flex;
+  gap: 4px;
+  background: rgba(7, 11, 16, 0.75);
+}
+
+.billing-toggle__btn {
+  border: 0;
+  background: transparent;
+  color: rgba(244, 246, 251, 0.7);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.billing-toggle__btn.is-active {
+  background: var(--app-accent);
+  color: #fff;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.plan-card {
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(14, 18, 26, 0.95) 0%, rgba(8, 11, 17, 0.95) 100%);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.plan-card--featured {
+  border-color: rgba(255, 15, 31, 0.5);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.34);
+}
+
+.plan-card__badge {
+  margin: 0;
+  width: fit-content;
+  background: var(--app-accent);
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.plan-card__title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.plan-card__description {
+  margin: 0;
+  color: var(--app-muted);
+  line-height: 1.5;
+  min-height: 46px;
+}
+
+.plan-card__price {
+  margin: 2px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.plan-card__price strong {
+  font-size: 2rem;
+}
+
+.plan-card__price span {
+  color: var(--app-muted);
+}
+
+.plan-card__actions {
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn--accent {
+  background: var(--app-accent);
+  color: #fff;
+}
+
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.plans-compare {
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(11, 16, 24, 0.95) 0%, rgba(8, 11, 17, 0.92) 100%);
+}
+
+.plans-compare__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.plans-compare__lead {
+  margin: 8px 0 16px;
+  color: var(--app-muted);
+}
+
+.compare-tabs {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.compare-tabs__btn {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--app-text);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.compare-tabs__btn.is-active {
+  border-color: var(--app-accent);
+  background: rgba(255, 15, 31, 0.15);
+}
+
+.compare-panels {
+  margin-top: 14px;
+}
+
+.compare-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px;
+  background: rgba(5, 8, 13, 0.75);
+}
+
+.compare-panel p {
+  margin: 8px 0;
+  color: rgba(244, 246, 251, 0.88);
+}
+
+@media (max-width: 980px) {
+  .plans-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .subscription-page__hero {
+    padding: 16px;
+    flex-direction: column;
+  }
+
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-card__actions {
+    flex-direction: column;
+  }
+}

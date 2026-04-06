@@ -1,0 +1,161 @@
+<div class="movie-page">
+    <section class="hero-slider" aria-label="Featured movies">
+        <div class="hero-slider__viewport" data-slider>
+            <div class="hero-slider__content">
+                <h1 class="hero-slider__title" data-title>Avengers: Endgame</h1>
+                <p class="hero-slider__description" data-description>
+                    With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and restore balance to the universe.
+                </p>
+                <div class="hero-slider__actions">
+                    <button class="hero-slider__play-button" type="button">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M8 5v14l11-7z"></path>
+                        </svg>
+                        <span>Play Now</span>
+                    </button>
+                    <button class="hero-slider__icon-button" type="button" aria-label="Add to watchlist">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"></path>
+                        </svg>
+                    </button>
+                    <button class="hero-slider__icon-button" type="button" aria-label="Like movie">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M2 21h4V9H2v12zm20-11a2 2 0 0 0-2-2h-6.3l1-4.6.03-.32a1 1 0 0 0-.3-.7L13.4 1 7.6 6.8A2 2 0 0 0 7 8.2V19a2 2 0 0 0 2 2h8a2 2 0 0 0 1.9-1.4l2-7A2 2 0 0 0 22 10z"></path>
+                        </svg>
+                    </button>
+                    <button class="hero-slider__icon-button" type="button" aria-label="Toggle sound">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M14 3.2 8.5 8H4v8h4.5L14 20.8V3.2zm4.5 8.8a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm2.5 0a7 7 0 0 1-4 6.3v-2.1a5 5 0 0 0 0-8.4V5.7a7 7 0 0 1 4 6.3z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <button class="hero-slider__nav hero-slider__nav--prev" type="button" data-slide-dir="-1" aria-label="Previous slide">
+                <span aria-hidden="true">&#8592;</span>
+            </button>
+            <button class="hero-slider__nav hero-slider__nav--next" type="button" data-slide-dir="1" aria-label="Next slide">
+                <span aria-hidden="true">&#8594;</span>
+            </button>
+
+            <div class="hero-slider__indicators" data-indicators></div>
+        </div>
+    </section>
+
+    <section class="content-section" data-row-section="movie-genres" aria-label="Movie genres">
+        <div class="content-section__header">
+            <div class="content-section__heading">
+                <span class="content-section__badge">Movies</span>
+                <h2 class="content-section__title">Our Genres</h2>
+            </div>
+            <div class="section-controls">
+                <button class="section-controls__nav" type="button" data-row-target="movie-genres" data-row-dir="-1" aria-label="Previous items">&#8592;</button>
+                
+                <button class="section-controls__nav" type="button" data-row-target="movie-genres" data-row-dir="1" aria-label="Next items">&#8594;</button>
+            </div>
+        </div>
+        <div class="content-section__track content-section__track--genre" data-row-track="movie-genres"></div>
+    </section>
+
+    <section class="content-section" data-row-section="top10-genres" aria-label="Popular top genres">
+        <div class="content-section__header">
+            <div class="content-section__heading">
+                <h2 class="content-section__title">Popular Top 10 In Genres</h2>
+            </div>
+            <div class="section-controls">
+                <button class="section-controls__nav" type="button" data-row-target="top10-genres" data-row-dir="-1" aria-label="Previous items">&#8592;</button>
+
+                <button class="section-controls__nav" type="button" data-row-target="top10-genres" data-row-dir="1" aria-label="Next items">&#8594;</button>
+            </div>
+        </div>
+        <div class="content-section__track content-section__track--genre" data-row-track="top10-genres"></div>
+    </section>
+
+    <section class="content-section" data-row-section="trending-now" aria-label="Trending movies">
+        <div class="content-section__header">
+            <div class="content-section__heading">
+                <h2 class="content-section__title">Trending Now</h2>
+            </div>
+            <div class="section-controls">
+                <button class="section-controls__nav" type="button" data-row-target="trending-now" data-row-dir="-5" aria-label="Previous items">&#8592;</button>
+                <button class="section-controls__nav" type="button" data-row-target="trending-now" data-row-dir="5" aria-label="Next items">&#8594;</button>
+            </div>
+        </div>
+        <div class="content-section__track" data-row-track="trending-now"></div>
+    </section>
+
+    <section class="content-section" data-row-section="new-releases" aria-label="New releases">
+        <div class="content-section__header">
+            <div class="content-section__heading">
+                <h2 class="content-section__title">New Releases</h2>
+            </div>
+            <div class="section-controls">
+                <button class="section-controls__nav" type="button" data-row-target="new-releases" data-row-dir="-5" aria-label="Previous items">&#8592;</button>
+                <button class="section-controls__nav" type="button" data-row-target="new-releases" data-row-dir="5" aria-label="Next items">&#8594;</button>
+            </div>
+        </div>
+        <div class="content-section__track" data-row-track="new-releases"></div>
+    </section>
+
+    <section class="content-section" data-row-section="must-watch-movies" aria-label="Must watch movies">
+        <div class="content-section__header">
+            <div class="content-section__heading">
+                <h2 class="content-section__title">Must - Watch Movies</h2>
+            </div>
+            <div class="section-controls">
+                <button class="section-controls__nav" type="button" data-row-target="must-watch-movies" data-row-dir="-5" aria-label="Previous items">&#8592;</button>
+                <button class="section-controls__nav" type="button" data-row-target="must-watch-movies" data-row-dir="5" aria-label="Next items">&#8594;</button>
+            </div>
+        </div>
+        <div class="content-section__track" data-row-track="must-watch-movies"></div>
+    </section>
+
+    <section class="content-section" data-row-section="trending-shows" aria-label="Trending shows">
+        <div class="content-section__header">
+            <div class="content-section__heading">
+                <h2 class="content-section__title">Trending Shows Now</h2>
+            </div>
+            <div class="section-controls">
+                <button class="section-controls__nav" type="button" data-row-target="trending-shows" data-row-dir="-5" aria-label="Previous items">&#8592;</button>
+                <button class="section-controls__nav" type="button" data-row-target="trending-shows" data-row-dir="5" aria-label="Next items">&#8594;</button>
+            </div>
+        </div>
+        <div class="content-section__track" data-row-track="trending-shows"></div>
+    </section>
+
+    <section class="content-section" data-row-section="new-released-shows" aria-label="New released shows">
+        <div class="content-section__header">
+            <div class="content-section__heading">
+                <h2 class="content-section__title">New Released Shows</h2>
+            </div>
+            <div class="section-controls">
+                <button class="section-controls__nav" type="button" data-row-target="new-released-shows" data-row-dir="-5" aria-label="Previous items">&#8592;</button>
+                <button class="section-controls__nav" type="button" data-row-target="new-released-shows" data-row-dir="5" aria-label="Next items">&#8594;</button>
+            </div>
+        </div>
+        <div class="content-section__track" data-row-track="new-released-shows"></div>
+    </section>
+
+    <section class="content-section" data-row-section="must-watch-shows" aria-label="Must watch shows">
+        <div class="content-section__header">
+            <div class="content-section__heading">
+                <h2 class="content-section__title">Must - Watch Shows</h2>
+            </div>
+            <div class="section-controls">
+                <button class="section-controls__nav" type="button" data-row-target="must-watch-shows" data-row-dir="-5" aria-label="Previous items">&#8592;</button>
+                <button class="section-controls__nav" type="button" data-row-target="must-watch-shows" data-row-dir="5" aria-label="Next items">&#8594;</button>
+            </div>
+        </div>
+        <div class="content-section__track" data-row-track="must-watch-shows"></div>
+    </section>
+
+    <!-- <section class="trial-banner" aria-label="Free trial banner">
+        <div class="trial-banner__content">
+            <h2 class="trial-banner__title">Start your free trial today!</h2>
+            <p class="trial-banner__subtitle">
+                This is a clear and concise call to action that encourages users to sign up for a free trial.
+            </p>
+        </div>
+        <button class="trial-banner__button" type="button">Start a Free Trial</button>
+    </section> -->
+</div>

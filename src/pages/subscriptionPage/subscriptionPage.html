@@ -1,0 +1,90 @@
+<section class="subscription-page" aria-label="Subscription plans">
+  <div class="subscription-page__hero">
+    <div class="subscription-page__hero-copy">
+      <h1 class="subscription-page__title">Choose the plan that's right for you</h1>
+      <p class="subscription-page__lead">
+        Pick a flexible subscription and stream movies and shows without limits.
+      </p>
+    </div>
+    <div class="billing-toggle" role="group" aria-label="Billing period">
+      <button class="billing-toggle__btn is-active" type="button" data-billing="monthly">Monthly</button>
+      <button class="billing-toggle__btn" type="button" data-billing="yearly">Yearly</button>
+    </div>
+  </div>
+
+  <div class="plans-grid">
+    <article class="plan-card" data-plan="basic">
+      <h2 class="plan-card__title">Basic Plan</h2>
+      <p class="plan-card__description">Great for casual viewers on one device.</p>
+      <p class="plan-card__price">
+        <strong data-price-value>$9.99</strong>
+        <span data-price-period>/month</span>
+      </p>
+      <div class="plan-card__actions">
+        <button type="button" class="btn btn--ghost">Start Free Trial</button>
+        <button type="button" class="btn btn--accent">Choose Plan</button>
+      </div>
+    </article>
+
+    <article class="plan-card plan-card--featured" data-plan="standard">
+      <p class="plan-card__badge">Popular</p>
+      <h2 class="plan-card__title">Standard Plan</h2>
+      <p class="plan-card__description">Balanced quality and content variety for most users.</p>
+      <p class="plan-card__price">
+        <strong data-price-value>$12.99</strong>
+        <span data-price-period>/month</span>
+      </p>
+      <div class="plan-card__actions">
+        <button type="button" class="btn btn--ghost">Start Free Trial</button>
+        <button type="button" class="btn btn--accent">Choose Plan</button>
+      </div>
+    </article>
+
+    <article class="plan-card" data-plan="premium">
+      <h2 class="plan-card__title">Premium Plan</h2>
+      <p class="plan-card__description">Best quality, full catalog, and extra simultaneous devices.</p>
+      <p class="plan-card__price">
+        <strong data-price-value>$14.99</strong>
+        <span data-price-period>/month</span>
+      </p>
+      <div class="plan-card__actions">
+        <button type="button" class="btn btn--ghost">Start Free Trial</button>
+        <button type="button" class="btn btn--accent">Choose Plan</button>
+      </div>
+    </article>
+  </div>
+
+  <section class="plans-compare" aria-label="Plan comparison">
+    <h2 class="plans-compare__title">Compare plans</h2>
+    <p class="plans-compare__lead">Switch between plans and review the key differences.</p>
+
+    <div class="compare-tabs" role="tablist" aria-label="Plan tabs">
+      <button class="compare-tabs__btn is-active" type="button" role="tab" aria-selected="true" data-tab-target="basic">Basic</button>
+      <button class="compare-tabs__btn" type="button" role="tab" aria-selected="false" data-tab-target="standard">Standard</button>
+      <button class="compare-tabs__btn" type="button" role="tab" aria-selected="false" data-tab-target="premium">Premium</button>
+    </div>
+
+    <div class="compare-panels">
+      <article class="compare-panel is-active" data-tab-panel="basic" role="tabpanel">
+        <p><strong>Price:</strong> $9.99/month or $99.99/year</p>
+        <p><strong>Devices:</strong> 1 device simultaneously</p>
+        <p><strong>Offline Viewing:</strong> No</p>
+        <p><strong>HDR:</strong> No</p>
+      </article>
+
+      <article class="compare-panel" data-tab-panel="standard" role="tabpanel" hidden>
+        <p><strong>Price:</strong> $12.99/month or $129.99/year</p>
+        <p><strong>Devices:</strong> 2 devices simultaneously</p>
+        <p><strong>Offline Viewing:</strong> Yes, selected titles</p>
+        <p><strong>HDR:</strong> Yes</p>
+      </article>
+
+      <article class="compare-panel" data-tab-panel="premium" role="tabpanel" hidden>
+        <p><strong>Price:</strong> $14.99/month or $149.99/year</p>
+        <p><strong>Devices:</strong> 4 devices simultaneously</p>
+        <p><strong>Offline Viewing:</strong> Yes, all titles</p>
+        <p><strong>HDR:</strong> Yes + Dolby Atmos</p>
+      </article>
+    </div>
+  </section>
+</section>

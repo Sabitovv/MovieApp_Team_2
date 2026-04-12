@@ -1,269 +1,272 @@
-const API_KEY = "121752a2"
-const BASE_URL = "https://www.omdbapi.com/"
-const FALLBACK_POSTER = "https://via.placeholder.com/300x450?text=No+Poster"
+const TMDB_API_KEY = "f6c44b80699265cbc6099f14cd33dc4b"
+const BASE_URL = "https://api.themoviedb.org/3"
+const IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
 
-let removeListeners = []
 let swiperInstances = []
 
-function escapeHtml(value = "") {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;")
+/* ---------------- API ---------------- */
+
+async function fetchTrending() {
+  try {
+    const res = await fetch(`${BASE_URL}/trending/movie/week?api_key=${TMDB_API_KEY}`)
+    const data = await res.json()
+    return data.results || []
+  } catch (err) { console.error(err); return [] }
 }
 
-function on(target, event, handler, options) {
-  target.addEventListener(event, handler, options)
-  removeListeners.push(() => target.removeEventListener(event, handler, options))
-}
-
-function destroyPrevious() {
-  removeListeners.forEach((remove) => remove())
-  removeListeners = []
-  swiperInstances.forEach((swiper) => swiper?.destroy?.(true, true))
-  swiperInstances = []
-}
-
-function ensureSwiperLoaded() {
-  if (window.Swiper) return Promise.resolve(window.Swiper)
-
-  const existingScript = document.querySelector('script[data-home-swiper="script"]')
-  if (existingScript) {
-    return new Promise((resolve, reject) => {
-      existingScript.addEventListener("load", () => resolve(window.Swiper), { once: true })
-      existingScript.addEventListener("error", () => reject(new Error("Failed to load Swiper script")), { once: true })
-    })
-  }
-
-  if (!document.querySelector('link[data-home-swiper="style"]')) {
-    const link = document.createElement("link")
-    link.rel = "stylesheet"
-    link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    link.setAttribute("data-home-swiper", "style")
-    document.head.appendChild(link)
-  }
-
-  return new Promise((resolve, reject) => {
-    const script = document.createElement("script")
-    script.src = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
-    script.async = true
-    script.setAttribute("data-home-swiper", "script")
-    script.onload = () => resolve(window.Swiper)
-    script.onerror = () => reject(new Error("Failed to load Swiper script"))
-    document.body.appendChild(script)
-  })
-}
-
-function renderSkeleton(containerId, count = 8) {
-  const container = document.getElementById(containerId)
-  if (!container) return
-
-  container.innerHTML = Array.from({ length: count }, () => '<div class="swiper-slide"><div class="home-skeleton"></div></div>').join("")
+async function fetchPopular() {
+  try {
+    const res = await fetch(`${BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}`)
+    const data = await res.json()
+    return data.results || []
+  } catch (err) { console.error(err); return [] }
 }
 
 async function fetchMovies(query) {
-  const response = await fetch(`${BASE_URL}?apikey=${API_KEY}&s=${encodeURIComponent(query)}`)
-  const data = await response.json()
-
-  if (data.Response !== "True" || !Array.isArray(data.Search)) return []
-
-  return data.Search.filter((movie, index, list) => index === list.findIndex((item) => item.imdbID === movie.imdbID))
+  try {
+    const res = await fetch(`${BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`)
+    const data = await res.json()
+    return data.results || []
+  } catch (err) { console.error(err); return [] }
 }
 
-function renderMovieSlides(containerId, movies) {
+/* ---------------- RENDER ---------------- */
+
+function renderMovies(containerId, movies) {
   const container = document.getElementById(containerId)
   if (!container) return
-
-  if (!movies.length) {
-    container.innerHTML = '<div class="swiper-slide"><p>No results found.</p></div>'
-    return
-  }
-
   container.innerHTML = movies
+    .filter((movie) => movie.poster_path)
     .map((movie) => {
-      const poster = movie.Poster && movie.Poster !== "N/A" ? movie.Poster : FALLBACK_POSTER
+      const poster = IMAGE_BASE + movie.poster_path
       return `
-        <div class="swiper-slide">
-          <article class="home-movie-card" data-movie-id="${escapeHtml(movie.imdbID)}">
-            <img src="${escapeHtml(poster)}" alt="${escapeHtml(movie.Title)}" loading="lazy" />
-            <p class="home-movie-card__title">${escapeHtml(movie.Title)}</p>
-          </article>
-        </div>
-      `
-    })
-    .join("")
+      <div class="swiper-slide">
+        <article class="home-movie-card" data-id="${movie.id}">
+          <img src="${poster}" alt="${movie.title}" loading="lazy" />
+          <p class="home-movie-card__title">${movie.title}</p>
+        </article>
+      </div>`
+    }).join("")
 }
 
-function initSwipers(Swiper) {
+function renderCtaPosters(movies) {
+  const container = document.getElementById("cta-posters")
+  if (!container) return
+  const withPosters = movies.filter(m => m.poster_path)
+  const shuffled = [...withPosters].sort(() => Math.random() - 0.5)
+  const repeated = []
+  while (repeated.length < 24) repeated.push(...shuffled)
+  container.innerHTML = repeated.slice(0, 24).map(m => `
+    <img
+      src="https://image.tmdb.org/t/p/w200${m.poster_path}"
+      alt="movie poster"
+      loading="lazy"
+      onerror="this.style.background='#1a1f2e';this.style.border='none';this.style.opacity='0'"
+    >`).join("")
+}
+
+/* ---------------- MODAL ---------------- */
+
+async function openMovieModal(id) {
+  const modal = document.getElementById("home-movie-modal")
+  const body = document.getElementById("home-modal-body")
+  const res = await fetch(`${BASE_URL}/movie/${id}?api_key=${TMDB_API_KEY}`)
+  const movie = await res.json()
+  const poster = movie.poster_path ? IMAGE_BASE + movie.poster_path : null
+  body.innerHTML = `
+    <div class="home-modal__hero" style="background-image:url(${poster})"></div>
+    <div class="home-modal__info">
+      <h2>${movie.title}</h2>
+      <p>⭐ Rating: ${movie.vote_average}</p>
+      <p>${movie.overview || "No description available."}</p>
+      <p>Release: ${movie.release_date || "Unknown"}</p>
+    </div>`
+  modal.style.display = "block"
+  document.body.style.overflow = "hidden"
+}
+
+function closeModal() {
+  const modal = document.getElementById("home-movie-modal")
+  modal.style.display = "none"
+  document.body.style.overflow = ""
+}
+
+/* ---------------- HELPERS ---------------- */
+
+function scrollToSection(id) {
+  const el = document.getElementById(id)
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+}
+
+function goToPage(hash) {
+  window.location.hash = hash
+}
+
+/* ---------------- SWIPERS ---------------- */
+
+function destroySwipers() {
+  swiperInstances.forEach((sw) => { if (sw && sw.destroy) sw.destroy(true, true) })
+  swiperInstances = []
+}
+
+function initSwipers() {
+  if (typeof Swiper === "undefined") { console.error("Swiper not loaded"); return }
+  destroySwipers()
+
   const heroSwiper = new Swiper(".home-hero__swiper", {
-    loop: true,
-    effect: "fade",
-    fadeEffect: { crossFade: true },
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: false,
     autoplay: { delay: 5000, disableOnInteraction: false },
-    speed: 1200
+    speed: 600,
+    navigation: { nextEl: ".home-hero__next", prevEl: ".home-hero__prev" },
+    pagination: { el: ".home-hero__pagination", clickable: true }
   })
 
   const trendingSwiper = new Swiper(".home-swiper--trending", {
     slidesPerView: 2,
-    spaceBetween: 14,
-    navigation: {
-      nextEl: ".home-swiper-next-trending",
-      prevEl: ".home-swiper-prev-trending"
-    },
+    spaceBetween: 16,
+    navigation: { nextEl: ".home-swiper-next-trending", prevEl: ".home-swiper-prev-trending" },
     breakpoints: {
-      640: { slidesPerView: 3, spaceBetween: 16 },
-      960: { slidesPerView: 4, spaceBetween: 18 },
-      1240: { slidesPerView: 5, spaceBetween: 20 }
+      640: { slidesPerView: 3 },
+      960: { slidesPerView: 5 },
+      1200: { slidesPerView: 6 }
     }
   })
 
   const popularSwiper = new Swiper(".home-swiper--popular", {
     slidesPerView: 2,
-    spaceBetween: 14,
-    navigation: {
-      nextEl: ".home-swiper-next-popular",
-      prevEl: ".home-swiper-prev-popular"
-    },
+    spaceBetween: 16,
+    navigation: { nextEl: ".home-swiper-next-popular", prevEl: ".home-swiper-prev-popular" },
     breakpoints: {
-      640: { slidesPerView: 3, spaceBetween: 16 },
-      960: { slidesPerView: 4, spaceBetween: 18 },
-      1240: { slidesPerView: 5, spaceBetween: 20 }
+      640: { slidesPerView: 3 },
+      960: { slidesPerView: 5 },
+      1200: { slidesPerView: 6 }
     }
   })
 
   swiperInstances.push(heroSwiper, trendingSwiper, popularSwiper)
 }
 
-async function openMovieModal(movieId) {
-  const modal = document.getElementById("home-movie-modal")
-  const body = document.getElementById("home-modal-body")
-  if (!modal || !body || !movieId) return
+/* ---------------- FAQ ---------------- */
 
-  try {
-    const response = await fetch(`${BASE_URL}?apikey=${API_KEY}&i=${encodeURIComponent(movieId)}&plot=full`)
-    const movie = await response.json()
-    if (movie.Response !== "True") return
-
-    const poster = movie.Poster && movie.Poster !== "N/A" ? movie.Poster : FALLBACK_POSTER
-    body.innerHTML = `
-      <div class="home-modal__hero" style="background-image:url('${escapeHtml(poster)}')"></div>
-      <div class="home-modal__info">
-        <h3>${escapeHtml(movie.Title)}</h3>
-        <p class="home-modal__meta">
-          <span>⭐ ${escapeHtml(movie.imdbRating || "N/A")}</span>
-          <span>${escapeHtml(movie.Year || "-")}</span>
-          <span>${escapeHtml(movie.Runtime || "-")}</span>
-        </p>
-        <p class="home-modal__desc">${escapeHtml(movie.Plot || "No description")}</p>
-      </div>
-    `
-
-    modal.style.display = "block"
-    modal.setAttribute("aria-hidden", "false")
-    document.body.style.overflow = "hidden"
-  } catch (error) {
-    console.error("Failed to load movie details:", error)
-  }
-}
-
-function closeMovieModal() {
-  const modal = document.getElementById("home-movie-modal")
-  if (!modal) return
-  modal.style.display = "none"
-  modal.setAttribute("aria-hidden", "true")
-  document.body.style.overflow = ""
-}
-
-function bindUiEvents(root) {
-  on(root, "click", (event) => {
-    const card = event.target.closest("[data-movie-id]")
-    if (card) {
-      openMovieModal(card.getAttribute("data-movie-id"))
-      return
-    }
-
-    const scrollButton = event.target.closest("[data-scroll-target]")
-    if (scrollButton) {
-      const id = scrollButton.getAttribute("data-scroll-target")
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
-      return
-    }
-
-    if (event.target.closest("[data-open-sample]")) {
-      openMovieModal("tt0903747")
-      return
-    }
-
-    if (event.target.closest(".home-modal__close")) {
-      closeMovieModal()
-      return
-    }
-
-    if (event.target.id === "home-movie-modal") {
-      closeMovieModal()
-    }
-  })
-
-  const searchInput = document.getElementById("home-search-input")
-  if (searchInput) {
-    on(searchInput, "keypress", async (event) => {
-      if (event.key !== "Enter") return
-
-      const query = searchInput.value.trim()
-      if (query.length < 3) return
-
-      const hero = document.getElementById("hero-section")
-      if (hero) hero.style.display = "none"
-
-      renderSkeleton("home-trending-list", 8)
-      const searched = await fetchMovies(query)
-      renderMovieSlides("home-trending-list", searched)
-      swiperInstances.forEach((swiper) => swiper?.update?.())
+function initFaq() {
+  const items = document.querySelectorAll(".home-faq__item")
+  if (!items.length) return
+  const first = items[0]
+  if (first) first.setAttribute("open", "")
+  items.forEach((item) => {
+    item.addEventListener("toggle", () => {
+      if (item.open) items.forEach((other) => { if (other !== item) other.removeAttribute("open") })
     })
-  }
+  })
+}
 
-  document.querySelectorAll(".home-faq__item").forEach((item) => {
-    on(item, "toggle", () => {
-      if (!item.open) return
-      document.querySelectorAll(".home-faq__item").forEach((other) => {
-        if (other !== item && other.open) other.removeAttribute("open")
+/* ---------------- PRICING ---------------- */
+
+function initPricing() {
+  const btns = document.querySelectorAll(".home-pricing__toggle-btn")
+  const amounts = document.querySelectorAll(".home-pricing__amount")
+  if (!btns.length) return
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btns.forEach((b) => b.classList.remove("active"))
+      btn.classList.add("active")
+      const period = btn.dataset.period
+      amounts.forEach((amount) => {
+        amount.textContent = period === "yearly" ? amount.dataset.yearly : amount.dataset.monthly
       })
     })
   })
+}
 
-  const backToTop = document.getElementById("home-back-to-top")
-  if (backToTop) {
-    on(window, "scroll", () => {
-      backToTop.style.display = window.scrollY > 360 ? "inline-flex" : "none"
-    })
+/* ---------------- BUTTONS ---------------- */
 
-    on(backToTop, "click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" })
+function initButtons() {
+  // Hero кнопки
+  const slide1Btn = document.querySelector(".home-hero__slide--1 .home-btn")
+  const slide2Btn = document.querySelector(".home-hero__slide--2 .home-btn")
+  const slide3Btn = document.querySelector(".home-hero__slide--3 .home-btn")
+  if (slide1Btn) slide1Btn.addEventListener("click", () => scrollToSection("trending-movies"))
+  if (slide2Btn) slide2Btn.addEventListener("click", () => scrollToSection("popular-movies"))
+  if (slide3Btn) slide3Btn.addEventListener("click", () => scrollToSection("trending-movies"))
+
+  // FAQ кнопка
+  const askBtn = document.querySelector(".home-faq__ask-btn")
+  if (askBtn) askBtn.addEventListener("click", () => goToPage("#/support"))
+
+  // Pricing кнопки
+  document.querySelectorAll(".home-pricing__trial").forEach((btn) => {
+    btn.addEventListener("click", () => goToPage("#/subscription"))
+  })
+  document.querySelectorAll(".home-pricing__actions .home-btn").forEach((btn) => {
+    btn.addEventListener("click", () => goToPage("#/subscription"))
+  })
+
+  // CTA кнопка
+  const ctaBtn = document.querySelector(".home-cta__btn")
+  if (ctaBtn) ctaBtn.addEventListener("click", () => goToPage("#/subscription"))
+
+  // Footer Home ссылки — скролл к секциям через data-scroll
+  document.querySelectorAll("[data-scroll]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault()
+      const id = link.getAttribute("data-scroll")
+      scrollToSection(id)
     })
+  })
+}
+
+/* ---------------- EVENTS ---------------- */
+
+function bindEvents() {
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".home-movie-card")
+    if (card) openMovieModal(card.dataset.id)
+    if (e.target.classList.contains("home-modal__close") || e.target.id === "home-movie-modal") closeModal()
+  })
+
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal() })
+
+  const backBtn = document.getElementById("home-back-to-top")
+  if (backBtn) {
+    window.addEventListener("scroll", () => {
+      const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
+      backBtn.style.display = (window.scrollY > 400 && !nearBottom) ? "flex" : "none"
+    })
+    backBtn.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }) })
   }
 }
 
+/* ---------------- SEARCH ---------------- */
+
+function initSearch() {
+  const input = document.getElementById("home-search-input")
+  if (!input) return
+  input.addEventListener("keypress", async (e) => {
+    if (e.key !== "Enter") return
+    const query = input.value.trim()
+    if (query.length < 3) return
+    const movies = await fetchMovies(query)
+    renderMovies("home-trending-list", movies)
+    setTimeout(() => initSwipers(), 0)
+  })
+}
+
+/* ---------------- INIT ---------------- */
+
 export async function init() {
-  destroyPrevious()
+  initFaq()
+  initPricing()
+  initButtons()
+  bindEvents()
+  initSearch()
 
-  const root = document.querySelector(".home-page")
-  if (!root) return
+  const [trending, popular] = await Promise.all([fetchTrending(), fetchPopular()])
 
-  try {
-    const Swiper = await ensureSwiperLoaded()
+  renderMovies("home-trending-list", trending)
+  renderMovies("home-popular-list", popular)
+  renderCtaPosters([...trending, ...popular])
 
-    renderSkeleton("home-trending-list", 8)
-    renderSkeleton("home-popular-list", 8)
-
-    const [trending, popular] = await Promise.all([fetchMovies("Marvel"), fetchMovies("Mission")])
-    renderMovieSlides("home-trending-list", trending)
-    renderMovieSlides("home-popular-list", popular)
-
-    initSwipers(Swiper)
-    bindUiEvents(root)
-  } catch (error) {
-    console.error("Failed to initialize Home page:", error)
-  }
+  setTimeout(() => initSwipers(), 0)
 }

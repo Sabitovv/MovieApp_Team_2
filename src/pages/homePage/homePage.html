@@ -1,4 +1,6 @@
 <section class="home-page" aria-label="Home page">
+
+  <!-- HERO -->
   <section class="home-hero" id="hero-section">
     <div class="swiper home-hero__swiper">
       <div class="swiper-wrapper">
@@ -6,27 +8,28 @@
           <div class="home-hero__content">
             <h1>Discover Movies</h1>
             <p>Find your favorite movies and explore new releases.</p>
-            <button class="home-btn" type="button" data-scroll-target="trending-movies">Explore now</button>
+            <button class="home-btn" type="button">Explore now</button>
           </div>
         </div>
         <div class="swiper-slide home-hero__slide home-hero__slide--2">
           <div class="home-hero__content">
             <h1>Amazing Series</h1>
             <p>Watch the best TV shows from all over the world.</p>
-            <button class="home-btn" type="button" data-open-sample>Watch now</button>
+            <button class="home-btn" type="button">Watch now</button>
           </div>
         </div>
         <div class="swiper-slide home-hero__slide home-hero__slide--3">
           <div class="home-hero__content">
             <h1>New Releases</h1>
             <p>Stay updated with the latest from the cinema world.</p>
-            <button class="home-btn" type="button" data-scroll-target="popular-movies">Learn more</button>
+            <button class="home-btn" type="button">Learn more</button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SEARCH -->
   <section class="home-toolbar" aria-label="Search movies">
     <label class="home-search" for="home-search-input">
       <span>Search</span>
@@ -34,6 +37,7 @@
     </label>
   </section>
 
+  <!-- TRENDING -->
   <section class="home-section" id="trending-movies">
     <h2>Trending Movies</h2>
     <div class="swiper home-swiper home-swiper--trending">
@@ -43,6 +47,7 @@
     </div>
   </section>
 
+  <!-- POPULAR -->
   <section class="home-section" id="popular-movies">
     <h2>Popular Movies</h2>
     <div class="swiper home-swiper home-swiper--popular">
@@ -52,28 +57,183 @@
     </div>
   </section>
 
-  <section class="home-faq" aria-label="Frequently asked questions">
-    <h2>Frequently Asked Questions</h2>
-    <details class="home-faq__item">
-      <summary>
-        <span>What is Movie Home?</span>
-        <span class="home-faq__icon">+</span>
-      </summary>
-      <p>
-        Movie Home is a streaming service with movies, TV shows, and curated collections.
-      </p>
-    </details>
-    <details class="home-faq__item">
-      <summary>
-        <span>How much does Movie Home cost?</span>
-        <span class="home-faq__icon">+</span>
-      </summary>
-      <p>
-        You can use a free plan and upgrade to premium with monthly or yearly billing.
-      </p>
-    </details>
+  
+ <section class="home-devices" id="home-devices-section">
+  <div class="home-devices__header">
+    <h2>We Provide you streaming experience across various devices.</h2>
+    <p>With MovieApp, you can enjoy your favorite movies and TV shows anytime, anywhere. Our platform is designed to be compatible with a wide range of devices, ensuring that you never miss a moment of entertainment.</p>
+  </div>
+  <div class="home-devices__grid">
+    
+    <div class="home-devices__card">
+      <div class="home-devices__card-top">
+        <span class="home-devices__icon icon-smartphone"></span>
+        <h3>Smartphones</h3>
+      </div>
+      <p>MovieApp is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store.</p>
+    </div>
+
+    <div class="home-devices__card">
+      <div class="home-devices__card-top">
+        <span class="home-devices__icon icon-tablet"></span>
+        <h3>Tablet</h3>
+      </div>
+      <p>MovieApp is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store.</p>
+    </div>
+
+    <div class="home-devices__card">
+      <div class="home-devices__card-top">
+        <span class="home-devices__icon icon-tv"></span>
+        <h3>Smart TV</h3>
+      </div>
+      <p>MovieApp is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store.</p>
+    </div>
+
+    <div class="home-devices__card">
+      <div class="home-devices__card-top">
+        <span class="home-devices__icon icon-laptop"></span>
+        <h3>Laptops</h3>
+      </div>
+      <p>MovieApp is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store.</p>
+    </div>
+
+    <div class="home-devices__card">
+      <div class="home-devices__card-top">
+        <span class="home-devices__icon icon-console"></span>
+        <h3>Gaming Consoles</h3>
+      </div>
+      <p>MovieApp is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store.</p>
+    </div>
+
+    <div class="home-devices__card">
+      <div class="home-devices__card-top">
+        <span class="home-devices__icon icon-vr"></span>
+        <h3>VR Headsets</h3>
+      </div>
+      <p>MovieApp is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store.</p>
+    </div>
+
+  </div>
+</section>
+
+  <!-- FAQ — добавлен id для скролла -->
+  <section class="home-faq" id="home-faq-section" aria-label="Frequently asked questions">
+    <div class="home-faq__header">
+      <div class="home-faq__header-left">
+        <h2>Frequently Asked Questions</h2>
+        <p>Got questions? We've got answers! Check out our FAQ section to find answers to the most common questions about MovieApp.</p>
+      </div>
+      <button class="home-faq__ask-btn" type="button">Ask a Question</button>
+    </div>
+    <div class="home-faq__grid">
+      <div class="home-faq__col">
+        <details class="home-faq__item">
+          <summary><span class="home-faq__num">01</span><span class="home-faq__question">What is Movie App?</span><span class="home-faq__icon"></span></summary>
+          <p>Movie App is a streaming service that allows you to watch movies and shows on demand.</p>
+        </details>
+        <details class="home-faq__item">
+          <summary><span class="home-faq__num">02</span><span class="home-faq__question">How much does Movie App cost?</span><span class="home-faq__icon"></span></summary>
+          <p>You can use a free plan and upgrade to premium anytime.</p>
+        </details>
+        <details class="home-faq__item">
+          <summary><span class="home-faq__num">03</span><span class="home-faq__question">What content is available?</span><span class="home-faq__icon"></span></summary>
+          <p>Thousands of movies, TV shows and curated collections.</p>
+        </details>
+        <details class="home-faq__item">
+          <summary><span class="home-faq__num">04</span><span class="home-faq__question">How can I watch Movie App?</span><span class="home-faq__icon"></span></summary>
+          <p>You can watch on any device — phone, tablet, laptop or Smart TV.</p>
+        </details>
+      </div>
+      <div class="home-faq__col home-faq__col--right">
+        <details class="home-faq__item">
+          <summary><span class="home-faq__num">05</span><span class="home-faq__question">How do I sign up?</span><span class="home-faq__icon"></span></summary>
+          <p>Click Start Free Trial and create your account in minutes.</p>
+        </details>
+        <details class="home-faq__item">
+          <summary><span class="home-faq__num">06</span><span class="home-faq__question">Is there a free trial?</span><span class="home-faq__icon"></span></summary>
+          <p>Yes! You get a 30-day free trial when you sign up.</p>
+        </details>
+        <details class="home-faq__item">
+          <summary><span class="home-faq__num">07</span><span class="home-faq__question">How do I contact support?</span><span class="home-faq__icon"></span></summary>
+          <p>Visit our Support page or email us at support@movieapp.com.</p>
+        </details>
+        <details class="home-faq__item">
+          <summary><span class="home-faq__num">08</span><span class="home-faq__question">What are the payment methods?</span><span class="home-faq__icon"></span></summary>
+          <p>We accept all major credit cards, PayPal and bank transfers.</p>
+        </details>
+      </div>
+    </div>
   </section>
 
+  <!-- PRICING — добавлен id для скролла -->
+  <section class="home-pricing" id="home-pricing-section" aria-label="Subscription plans">
+    <div class="home-pricing__header">
+      <div>
+        <h2>Choose the plan that's right for you</h2>
+        <p>Pick a flexible subscription and stream movies and shows without limits.</p>
+      </div>
+      <div class="home-pricing__toggle">
+        <button class="home-pricing__toggle-btn active" data-period="monthly">Monthly</button>
+        <button class="home-pricing__toggle-btn" data-period="yearly">Yearly</button>
+      </div>
+    </div>
+    <div class="home-pricing__grid">
+      <div class="home-pricing__card">
+        <h3>Basic Plan</h3>
+        <p>Great for casual viewers on one device.</p>
+        <div class="home-pricing__price">
+          <span class="home-pricing__amount" data-monthly="$9.99" data-yearly="$7.99">$9.99</span>
+          <span class="home-pricing__period">/month</span>
+        </div>
+        <div class="home-pricing__actions">
+          <button class="home-pricing__trial" type="button">Start Free Trial</button>
+          <button class="home-btn" type="button">Choose Plan</button>
+        </div>
+      </div>
+      <div class="home-pricing__card home-pricing__card--featured">
+        <span class="home-pricing__badge">POPULAR</span>
+        <h3>Standard Plan</h3>
+        <p>Balanced quality and content variety for most users.</p>
+        <div class="home-pricing__price">
+          <span class="home-pricing__amount" data-monthly="$12.99" data-yearly="$10.99">$12.99</span>
+          <span class="home-pricing__period">/month</span>
+        </div>
+        <div class="home-pricing__actions">
+          <button class="home-pricing__trial" type="button">Start Free Trial</button>
+          <button class="home-btn" type="button">Choose Plan</button>
+        </div>
+      </div>
+      <div class="home-pricing__card">
+        <h3>Premium Plan</h3>
+        <p>Best quality, full catalog, and extra simultaneous devices.</p>
+        <div class="home-pricing__price">
+          <span class="home-pricing__amount" data-monthly="$14.99" data-yearly="$12.99">$14.99</span>
+          <span class="home-pricing__period">/month</span>
+        </div>
+        <div class="home-pricing__actions">
+          <button class="home-pricing__trial" type="button">Start Free Trial</button>
+          <button class="home-btn" type="button">Choose Plan</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="home-cta">
+    <div class="home-cta__posters" id="cta-posters"></div>
+    <div class="home-cta__overlay"></div>
+    <div class="home-cta__inner">
+      <div class="home-cta__content-wrap">
+        <div class="home-cta__content">
+          <h2>Start your free trial today!</h2>
+          <p>This is a clear and concise call to action that encourages users to sign up for a free trial of MovieApp.</p>
+        </div>
+        <button class="home-cta__btn" type="button">Start a Free Trial</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
   <div id="home-movie-modal" class="home-modal" aria-hidden="true">
     <div class="home-modal__content">
       <button class="home-modal__close" type="button" aria-label="Close modal">&times;</button>
@@ -81,6 +241,79 @@
     </div>
   </div>
 
-  <footer class="home-footer">Movie App © 2026</footer>
-  <button id="home-back-to-top" class="home-back-to-top" type="button" aria-label="Go to top">↑</button>
+  <!-- FOOTER -->
+  <footer class="home-footer" aria-label="Site footer">
+    <div class="home-footer__nav">
+
+      <!-- Home — ссылки скроллят к секциям через data-scroll -->
+      <div class="home-footer__col">
+        <h4>Home</h4>
+        <ul>
+          <li><a href="#" data-scroll="trending-movies">Categories</a></li>
+          <li><a href="#" data-scroll="home-devices-section">Devices</a></li>
+          <li><a href="#" data-scroll="home-pricing-section">Pricing</a></li>
+          <li><a href="#" data-scroll="home-faq-section">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Movies — переход на страницу movies -->
+      <div class="home-footer__col">
+        <h4>Movies</h4>
+        <ul>
+          <li><a href="#/movie">Genres</a></li>
+          <li><a href="#/movie">Trending</a></li>
+          <li><a href="#/movie">New Release</a></li>
+          <li><a href="#/movie">Popular</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div class="home-footer__col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#/support">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Subscription -->
+      <div class="home-footer__col">
+        <h4>Subscription</h4>
+        <ul>
+          <li><a href="#/subscription">Plans</a></li>
+          <li><a href="#/subscription">Features</a></li>
+        </ul>
+      </div>
+
+      <!-- Connect With Us — все 3 иконки -->
+      <div class="home-footer__col">
+  <h4>Connect With Us</h4>
+  <div class="home-footer__socials">
+    
+    <a href="https://www.facebook.com/?locale=ru_RU" target="_blank" rel="noopener noreferrer" class="home-footer__social-btn" aria-label="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+      </svg>
+    </a>
+
+    <a href="https://x.com/?lang=ru" target="_blank" rel="noopener noreferrer" class="home-footer__social-btn" aria-label="Twitter">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+      </svg>
+    </a>
+
+    <a href="#" target="_blank" rel="noopener noreferrer" class="home-footer__social-btn" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
+        <circle cx="4" cy="4" r="2"/>
+      </svg>
+    </a>
+
+  </div>
+</div>
+
+    </div>
+
+  
+  </footer>
+
 </section>

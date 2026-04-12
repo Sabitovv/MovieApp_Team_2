@@ -97,6 +97,65 @@ textarea,
 select {
   font: inherit;
 }
+/* =========================================
+   ФИНАЛЬНЫЙ ФУТЕР (Полная гармония с сайтом)
+   ========================================= */
+
+.app-footer-simple {
+  width: 100%;
+  background-color: #0f0f0f;
+  border-top: 1px solid #262626;
+  padding: 40px 0;
+  margin-top: 80px;
+}
+
+.app-footer-simple__container {
+  /* Используем ту же логику ширины, что и в твоем .topbar__container */
+  width: min(1240px, 100% - 40px); 
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-footer-simple__copy {
+  color: #999;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.app-footer-simple__links {
+  display: flex;
+  gap: 30px;
+}
+
+.app-footer-simple__links a {
+  color: #999;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.app-footer-simple__links a:hover {
+  color: var(--app-accent); /* Используем твою переменную акцента */
+}
+
+/* =========================================
+   Адаптивность (Унифицированная под твой сайт)
+   ========================================= */
+/* Используем 700p,  */
+@media (max-width: 700px) {
+  .app-footer-simple__container {
+    width: min(1240px, 100% - 20px);
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .app-footer-simple__links {
+    gap: 15px;
+  }
+}
 
 @media (max-width: 700px) {
   .container {
